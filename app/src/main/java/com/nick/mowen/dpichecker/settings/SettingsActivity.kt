@@ -1,4 +1,4 @@
-package com.nick.mowen.dpichecker.ui
+package com.nick.mowen.dpichecker.settings
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -9,52 +9,40 @@ import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.nick.mowen.dpichecker.R
 import com.nick.mowen.dpichecker.adapter.ChangelogAdapter
+import com.nick.mowen.dpichecker.databinding.ActivitySettingsBinding
+import com.nick.mowen.dpichecker.skeleton.AbstractActivity
 import java.util.*
 
-class SettingsActivity : AbstractDpiActivity() {
+class SettingsActivity : AbstractActivity() {
+
+    override lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
-
-        if (ads) {
-            val adView = findViewById<AdView>(R.id.adView)
-            MobileAds.initialize(this, getString(R.string.app_id))
-            adView.loadAd(AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .build())
-        } else
-            findViewById<View>(R.id.adView).visibility = View.GONE
+        bindViews()
     }
 
     override fun bindViews() {
-
-    }
-
-    override fun updateAds() {
-        findViewById<View>(R.id.adView).visibility = View.GONE
+        setContentView(R.layout.activity_settings)
     }
 
     fun getChangelog(@Suppress("UNUSED_PARAMETER") v: View) {
         AlertDialog.Builder(this)
-                .setTitle("Whats new?")
-                .setView(RecyclerView(this).apply {
-                    setHasFixedSize(true)
-                    adapter = ChangelogAdapter(this@SettingsActivity, changelogData)
-                    layoutManager = LinearLayoutManager(this@SettingsActivity)
-                })
-                .setPositiveButton("RATE IN PLAY STORE") { _, _ ->
-                    try {
-                        startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=com.nick.mowen.sceneplugin".toUri()))
-                    } catch (e: android.content.ActivityNotFoundException) {
-                        startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.nick.mowen.sceneplugin".toUri()))
-                    }
-                }.show()
+            .setTitle("Whats new?")
+            .setView(RecyclerView(this).apply {
+                setHasFixedSize(true)
+                adapter = ChangelogAdapter(this@SettingsActivity, changelogData)
+                layoutManager = LinearLayoutManager(this@SettingsActivity)
+            })
+            .setPositiveButton("RATE IN PLAY STORE") { _, _ ->
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=com.nick.mowen.sceneplugin".toUri()))
+                } catch (e: android.content.ActivityNotFoundException) {
+                    startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.nick.mowen.sceneplugin".toUri()))
+                }
+            }.show()
     }
 
     fun contactDev(@Suppress("UNUSED_PARAMETER") view: View) {

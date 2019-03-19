@@ -41,4 +41,14 @@
     <string name="dummy_price">$1.00</string>
     <string name="dummy_description">Dummy description that should do something</string>
     <string name="action_purchase_premium">Purchase Premium</string>
+    <string name="content_description">Content Description</string>
+    <string name="action_licences">Open Source Licenses</string>
+    <string name="action_privacy_policy">Privacy Policy</string>
+    <string name="action_contact_developer">Contact Developer</string>
+    <string name="action_view_website">More info at my website</string>
+    <string name="action_changelog">Changelog</string>
+    <string name="action_share_app">Share the app :D</string>
+    <string name="action_rate_app">Rate in play store</string>
+    <string name="developer_play_store">Play Store</string>
+    <string name="developer_name_full">Nick Nack Development</string>
 </resources>
