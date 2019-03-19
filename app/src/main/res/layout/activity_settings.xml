@@ -65,7 +65,7 @@
                 android:background="?android:selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/verified"
                 android:drawableTint="?attr/colorControlNormal"
-                android:onClick="purchasePremium"
+                android:onClick="supportDev"
                 android:text="@string/action_purchase_premium"
                 app:layout_constraintBottom_toBottomOf="@+id/developer_play_store"
                 app:layout_constraintHorizontal_chainStyle="packed"

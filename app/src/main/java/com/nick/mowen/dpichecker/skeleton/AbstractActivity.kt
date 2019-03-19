@@ -30,13 +30,13 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
 
     private fun buildBilling() {
         billingClient = BillingClient.newBuilder(this)
-                .setListener(this)
-                .build()
+            .setListener(this)
+            .build()
 
-        billingClient!!.startConnection(object : BillingClientStateListener {
+        billingClient?.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(responseCode: Int) {
                 if (responseCode == BillingClient.BillingResponse.OK)
-                    premium = !checkPremium()
+                    premium = checkPremium()
             }
 
             override fun onBillingServiceDisconnected() {
@@ -49,10 +49,9 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
         if (billingClient == null)
             buildBilling()
         else {
-            val builder: BillingFlowParams.Builder = BillingFlowParams.newBuilder()
-                    .setSku(getString(R.string.soda))
-                    .setType(BillingClient.SkuType.INAPP)
-            billingClient!!.launchBillingFlow(this, builder.build())
+            billingClient?.querySkuDetailsAsync(SkuDetailsParams.newBuilder().setSkusList(listOf(getString(R.string.soda))).setType(BillingClient.SkuType.INAPP).build()) { _, detailList ->
+                billingClient!!.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(detailList[0]).build())
+            }
         }
     }
 

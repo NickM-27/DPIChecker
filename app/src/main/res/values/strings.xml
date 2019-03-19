@@ -1,5 +1,5 @@
 <resources>
-    <string-array name="changelog_version">
+    <string-array name="app_versions">
         <item>1.0</item>
         <item>1.1</item>
         <item>1.1.1</item>
@@ -9,8 +9,9 @@
         <item>4.0</item>
         <item>4.0.1</item>
         <item>4.1</item>
+        <item>5.0</item>
     </string-array>
-    <string-array name="changelog_texts">
+    <string-array name="app_changes">
         <item>• Initial release</item>
         <item>• Fixed some text from old version that made no sense</item>
         <item>• New App Icon</item>
@@ -20,12 +21,13 @@
         <item>• Updated app to Android P\n• App has new material design\n• Asks for ads consent</item>
         <item>• Bug Fixes</item>
         <item>• Added adaptive icons\n• Bug Fixes</item>
+        <item>• Updated app with a visual refresh\n• New settings screen</item>
     </string-array>
 
     <string name="app_name">DPI Checker</string>
     <string name="checkdpi">DPI</string>
     <string name="settings">Settings</string>
-    <string name="dev_link">market://search?q=pub:Nick Nack Developments</string>
+    <string name="dev_link">market://search?q=pub:Nick Nack Development</string>
     <string name="version_string">Version 4.0 (Tap for Changelog)</string>
     <string name="contact_dev">Contact Developer</string>
     <string name="support_dev">Support Developer</string>
@@ -51,4 +53,5 @@
     <string name="action_rate_app">Rate in play store</string>
     <string name="developer_play_store">Play Store</string>
     <string name="developer_name_full">Nick Nack Development</string>
+    <string name="dev_web_link">https://nicknackdevelopment.com</string>
 </resources>

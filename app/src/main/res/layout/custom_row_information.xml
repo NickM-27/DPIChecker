@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.nick.mowen.dpichecker.settings.SettingsActivity.Information" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@{info.title}"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@{info.description}"
+            android:textSize="16sp"
+            tools:text="@tools:sample/lorem/random" />
+
+    </LinearLayout>
+
+</layout>
