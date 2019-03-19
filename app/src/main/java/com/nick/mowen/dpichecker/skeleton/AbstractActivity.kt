@@ -1,21 +1,22 @@
-package com.nick.mowen.dpichecker.ui
+package com.nick.mowen.dpichecker.skeleton
 
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.databinding.ViewDataBinding
 import com.android.billingclient.api.*
 import com.nick.mowen.dpichecker.R
 
-abstract class AbstractDpiActivity : AppCompatActivity(), PurchasesUpdatedListener {
+abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
-    protected var ads: Boolean = false
+    protected abstract val binding: ViewDataBinding
     private var billingClient: BillingClient? = null
+    protected var premium = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         buildBilling()
-        ads = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("ads", true)
     }
 
     override fun onStop() {
@@ -23,21 +24,19 @@ abstract class AbstractDpiActivity : AppCompatActivity(), PurchasesUpdatedListen
         super.onStop()
     }
 
-    override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
-        if (responseCode == BillingClient.BillingResponse.OK && purchases != null) {
-            ads = false
-        }
-    }
+    override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) = Unit
 
-    protected fun buildBilling() {
+    abstract fun bindViews()
+
+    private fun buildBilling() {
         billingClient = BillingClient.newBuilder(this)
-                .setListener(this)
-                .build()
+            .setListener(this)
+            .build()
 
-        billingClient!!.startConnection(object : BillingClientStateListener {
+        billingClient?.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(responseCode: Int) {
                 if (responseCode == BillingClient.BillingResponse.OK)
-                    ads = !checkPremium()
+                    premium = checkPremium()
             }
 
             override fun onBillingServiceDisconnected() {
@@ -50,16 +49,11 @@ abstract class AbstractDpiActivity : AppCompatActivity(), PurchasesUpdatedListen
         if (billingClient == null)
             buildBilling()
         else {
-            val builder: BillingFlowParams.Builder = BillingFlowParams.newBuilder()
-                    .setSku(getString(R.string.soda))
-                    .setType(BillingClient.SkuType.INAPP)
-            billingClient!!.launchBillingFlow(this, builder.build())
+            billingClient?.querySkuDetailsAsync(SkuDetailsParams.newBuilder().setSkusList(listOf(getString(R.string.soda))).setType(BillingClient.SkuType.INAPP).build()) { _, detailList ->
+                billingClient!!.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(detailList[0]).build())
+            }
         }
     }
-
-    protected abstract fun bindViews()
-
-    protected abstract fun updateAds()
 
     private fun checkPremium(): Boolean {
         val purchaseResults: Purchase.PurchasesResult = billingClient!!.queryPurchases(BillingClient.SkuType.INAPP)

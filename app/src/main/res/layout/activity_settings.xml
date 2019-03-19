@@ -1,85 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".settings.SettingsActivity">
 
-    <TextView
-        android:id="@+id/settings_changelog"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="getChangelog"
-        android:padding="8dp"
-        android:text="@string/version_string"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/settings_contact"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintVertical_chainStyle="packed" />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:elevation="4dp"
+        app:cardBackgroundColor="?attr/colorBackgroundFloating"
+        tools:targetApi="m">
 
-    <TextView
-        android:id="@+id/settings_contact"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="contactDev"
-        android:padding="8dp"
-        android:text="@string/contact_dev"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/settings_support"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_changelog" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/settings_support"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="supportDev"
-        android:padding="8dp"
-        android:text="@string/action_purchase_premium"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/settings_other"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_contact" />
+            <ImageView
+                android:id="@+id/developer_profile"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toTopOf="@+id/developer_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
+                app:layout_constraintVertical_weight="3" />
 
-    <TextView
-        android:id="@+id/settings_other"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="otherAppsDev"
-        android:padding="8dp"
-        android:text="@string/other_apps"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/settings_gps"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_support" />
+            <TextView
+                android:id="@+id/developer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/developer_name_full"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/developer_play_store"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developer_profile" />
 
-    <TextView
-        android:id="@+id/settings_gps"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="gpsExplanation"
-        android:padding="8dp"
-        android:text="@string/gps_explanation"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_other" />
+            <TextView
+                android:id="@+id/developer_play_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/ic_play_store"
+                android:drawableTint="?attr/colorControlNormal"
+                android:onClick="playStore"
+                android:text="@string/developer_play_store"
+                app:layout_constraintBottom_toTopOf="@+id/developer_divider"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/developer_twitter"
+                app:layout_constraintTop_toBottomOf="@+id/developer_name" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-2142506713824375/4645692847"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+            <TextView
+                android:id="@+id/developer_twitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/verified"
+                android:drawableTint="?attr/colorControlNormal"
+                android:onClick="supportDev"
+                android:text="@string/action_purchase_premium"
+                app:layout_constraintBottom_toBottomOf="@+id/developer_play_store"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@+id/developer_play_store"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/developer_play_store" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:id="@+id/developer_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/app_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developer_twitter" />
+
+            <TextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/app_rate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developer_divider" />
+
+            <TextView
+                android:id="@+id/app_rate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="4dp"
+                android:drawableTint="?attr/colorControlNormal"
+                android:gravity="center_vertical"
+                android:onClick="rate"
+                android:padding="8dp"
+                android:text="@string/action_rate_app"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/app_changelog"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/app_left_barrier"
+                app:layout_constraintTop_toBottomOf="@+id/app_name" />
+
+            <TextView
+                android:id="@+id/app_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:onClick="share"
+                android:padding="8dp"
+                android:text="@string/action_share_app"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/app_rate"
+                app:layout_constraintLeft_toRightOf="@+id/app_left_barrier"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/app_rate" />
+
+            <TextView
+                android:id="@+id/app_changelog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_change_history"
+                android:drawablePadding="4dp"
+                android:drawableTint="?attr/colorControlNormal"
+                android:gravity="center_vertical"
+                android:onClick="changeLog"
+                android:padding="8dp"
+                android:text="@string/action_changelog"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/app_contact"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/app_left_barrier"
+                app:layout_constraintTop_toBottomOf="@+id/app_rate" />
+
+            <TextView
+                android:id="@+id/app_web"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_web"
+                android:drawablePadding="4dp"
+                android:drawableTint="?attr/colorControlNormal"
+                android:gravity="center_vertical"
+                android:onClick="web"
+                android:padding="8dp"
+                android:text="@string/action_view_website"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/app_changelog"
+                app:layout_constraintLeft_toRightOf="@+id/app_left_barrier"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/app_changelog" />
+
+            <TextView
+                android:id="@+id/app_contact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_contact_mail"
+                android:drawablePadding="4dp"
+                android:drawableTint="?attr/colorControlNormal"
+                android:gravity="center_vertical"
+                android:onClick="contact"
+                android:padding="8dp"
+                android:text="@string/action_contact_developer"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/app_sources"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/app_left_barrier"
+                app:layout_constraintTop_toBottomOf="@+id/app_changelog" />
+
+            <TextView
+                android:id="@+id/app_privacy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_privacy_policy"
+                android:drawablePadding="4dp"
+                android:drawableTint="?attr/colorControlNormal"
+                android:gravity="center_vertical"
+                android:onClick="privacy"
+                android:padding="8dp"
+                android:text="@string/action_privacy_policy"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/app_contact"
+                app:layout_constraintLeft_toRightOf="@+id/app_left_barrier"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/app_contact" />
+
+            <TextView
+                android:id="@+id/app_sources"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:drawableStart="@drawable/ic_list"
+                android:drawablePadding="4dp"
+                android:drawableTint="?attr/colorControlNormal"
+                android:gravity="center_vertical"
+                android:onClick="sources"
+                android:padding="8dp"
+                android:text="@string/action_licences"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_contact" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/app_left_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="app_rate,app_changelog,app_contact,app_sources" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
