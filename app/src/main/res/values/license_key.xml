@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="license_key" translatable="false" templateMergeStrategy="preserve">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8DtxId08QLzG2+DuG+yEYHYycRVHqLc7lEzBF3e5aL2HxwFq5E0RKkM0uf2rDnHlV/7QUWyo6eovosEi/MmM7NeQoA3NN0bfLka9QbMHR4CywKKCC+d0JseKn1HUanDiO1CP9LdgEixn30SdVdKKTY9IFWzBf5fNcwokMIWcmp3lcifi6IVvUa50wyo339u3UlV8cS0ktA2qidPmxKcOavD9ZMt7pKHB1mIkvkni+m0oAkt1P3q4o2gyCm0KynbOE+TAqCJ4+2pMzIuR/lRfZfWpmBB6+ezhk9aOTfTpolB5i++1LG9RFbS1qs4g7KESG0nhIKW+JJ0EAeWEILYRlQIDAQAB</string>
+
+    <string name="soda" translatable="false">
+        dpi_donation_mini
+    </string>
+
+    <string name="hotdog" translatable="false">
+        dpi_donation_smaller
+    </string>
+
+    <string name="sandwich" translatable="false">
+        dpi_donation_small
+    </string>
+
+    <string name="meal" translatable="false">
+        dpi_donation_medium
+    </string>
+
+    <string name="fullcoursemeal" translatable="false">
+        dpi_donation_large
+    </string>
+
+    <string name="app_id" translatable="false">
+        ca-app-pub-2142506713824375~3587762046
+    </string>
+
+</resources>
