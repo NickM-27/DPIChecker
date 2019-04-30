@@ -10,6 +10,7 @@
         <item>4.0.1</item>
         <item>4.1</item>
         <item>5.0</item>
+        <item>5.1</item>
     </string-array>
     <string-array name="app_changes">
         <item>• Initial release</item>
@@ -22,6 +23,7 @@
         <item>• Bug Fixes</item>
         <item>• Added adaptive icons\n• Bug Fixes</item>
         <item>• Updated app with a visual refresh\n• New settings screen</item>
+        <item>• Updated statistics\n• New app icon</item>
     </string-array>
 
     <string name="app_name">DPI Checker</string>
@@ -35,7 +37,7 @@
     <string name="gps_explanation">Google Play Services Version Explanation</string>
     <string name="gps_full_explanation">From APKMirror.com:\n\nTo figure out the right version of Google Play services for your Android device, go to Settings -> Apps -> Google Play services, and look at the last 3 numbers in the parentheses. You\'ll see something like -XYZ where:\n\nX defines Android version:\n\n0 for Android 5.0\n2 for Android 5.0 and 5.1 starting with Play Services v8\n4 for Android 5.0 and 5.1 before Play Services v8, Android >= 6.0 after\n7 for Android 5.0\n8 for Android TV\n\nY defines CPU architecture:\n\n1 for armeabi\n3 for armeabi-v7a\n4 for arm64-v8a\n7 for x86\n\nZ defines DPI:\n\n0 for universal\n2 for 160\n4 for 240\n6 for 320\n8 for 480</string>
     <string name="gps_recommendation"> If you want more information on Google Play Services and other dpi dependent applications, please visit the settings.</string>
-    <string name="dpi_explanation">This device DPI is %d\nIf you have found use out of this app and want to support future development, please consider purchasing premium</string>
+    <string name="dpi_explanation">Device Statistics:\nDPI: %d\nResolution: %d x %d\n\nIf you have found use out of this app and want to support future development, please consider purchasing premium</string>
     <string name="dpiis">This devices DPI is </string>
     <string name="dummy_version">2.0</string>
     <string name="dummy_text">This is dummy text</string>
