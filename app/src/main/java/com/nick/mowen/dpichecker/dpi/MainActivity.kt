@@ -1,12 +1,16 @@
 package com.nick.mowen.dpichecker.dpi
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.style.StyleSpan
 import android.transition.TransitionManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import androidx.databinding.DataBindingUtil
 import com.nick.mowen.dpichecker.R
 import com.nick.mowen.dpichecker.databinding.ActivityMainBinding
@@ -49,8 +53,11 @@ class MainActivity : AbstractActivity() {
 
     fun checkDPI(@Suppress("UNUSED_PARAMETER") view: View) {
         userDPI = dpi
+        val dimens = res
         TransitionManager.beginDelayedTransition(binding.container)
-        binding.explanation.text = String.format(getString(R.string.dpi_explanation), userDPI)
+        val text = String.format(getString(R.string.dpi_explanation), userDPI, dimens[0], dimens[1]).toSpannable()
+        text[0..17] = StyleSpan(Typeface.BOLD)
+        binding.explanation.text = text
         explanationFrame.applyTo(binding.container)
 
         if (premium)
