@@ -11,6 +11,7 @@
         <item>4.1</item>
         <item>5.0</item>
         <item>5.1</item>
+        <item>5.2</item>
     </string-array>
     <string-array name="app_changes">
         <item>• Initial release</item>
@@ -24,6 +25,7 @@
         <item>• Added adaptive icons\n• Bug Fixes</item>
         <item>• Updated app with a visual refresh\n• New settings screen</item>
         <item>• Updated statistics\n• New app icon</item>
+        <item>• Updated to Android Q\n• Support edge-to-edge\n• Added official Android dark theme\n• Bug fixes</item>
     </string-array>
 
     <string name="app_name">DPI Checker</string>

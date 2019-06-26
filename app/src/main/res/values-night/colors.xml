@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorSecondaryText">#B3FFFFFF</color>
+    <color name="colorTertiaryText">#80FFFFFF</color>
+    <color name="colorPrimaryTextInverse">#000000</color>
+    <color name="colorSecondaryTextInverse">#8C000000</color>
+    <color name="colorTertiaryTextInverse">#66000000</color>
+    <color name="colorBack">#303030</color>
+    <color name="colorCardBack">#424242</color>
+</resources>
