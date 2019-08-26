@@ -55,6 +55,7 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
                 .build()
 
             billingClient!!.startConnection(object : BillingClientStateListener {
+
                 override fun onBillingSetupFinished(billingResult: BillingResult?) {
                     if (billingResult?.responseCode == BillingClient.BillingResponseCode.OK)
                         premium = checkPremium()
@@ -76,14 +77,13 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
     protected fun buyPremium() {
         if (billingClient == null)
             buildBilling()
-        else {
+        else
             billingClient?.querySkuDetailsAsync(SkuDetailsParams.newBuilder().setSkusList(listOf(getString(R.string.soda))).setType(BillingClient.SkuType.INAPP).build()) { _, detailList ->
                 if (detailList != null && detailList.isNotEmpty())
                     billingClient?.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(detailList[0]).build())
                 else
                     Toast.makeText(this, "Please make sure that you are signed in to your Google Play account", Toast.LENGTH_SHORT).show()
             }
-        }
     }
 
     private fun acknowledgePurchase(purchaseToken: String) {
@@ -95,7 +95,7 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
     }
 
     private fun checkPremium(): Boolean {
-        val purchaseResults: Purchase.PurchasesResult = billingClient!!.queryPurchases(BillingClient.SkuType.INAPP)
+        val purchaseResults: Purchase.PurchasesResult = billingClient?.queryPurchases(BillingClient.SkuType.INAPP) ?: return false
         val purchases: List<Purchase> = purchaseResults.purchasesList
         return purchases.isNotEmpty()
     }
