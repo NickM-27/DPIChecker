@@ -8,8 +8,8 @@ android {
         applicationId "com.nick.mowen.dpichecker"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 14
-        versionName "6.0"
+        versionCode 15
+        versionName "7.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

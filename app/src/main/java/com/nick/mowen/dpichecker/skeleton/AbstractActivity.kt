@@ -21,7 +21,7 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
     }
 
     override fun onStop() {
-        PreferenceManager.getDefaultSharedPreferences(this).edit { putBoolean("ads", !checkPremium()) }
+        PreferenceManager.getDefaultSharedPreferences(this).edit { putBoolean("premium", checkPremium()) }
         super.onStop()
     }
 
