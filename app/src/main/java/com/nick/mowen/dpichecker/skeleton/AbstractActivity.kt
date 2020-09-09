@@ -25,7 +25,7 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
         super.onStop()
     }
 
-    override fun onPurchasesUpdated(billingResult: BillingResult?, purchases: MutableList<Purchase>?) {
+    override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
 
         fun handlePurchase(purchase: Purchase) {
             when (purchase.purchaseState) {
@@ -35,12 +35,11 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
                     if (!purchase.isAcknowledged)
                         acknowledgePurchase(purchase.purchaseToken)
                 }
-                Purchase.PurchaseState.PENDING ->
-                    premium = false
+                Purchase.PurchaseState.PENDING -> premium = false
             }
         }
 
-        if (billingResult?.responseCode == BillingClient.BillingResponseCode.OK && purchases != null)
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null)
             for (purchase in purchases)
                 handlePurchase(purchase)
     }
@@ -56,8 +55,8 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
 
             billingClient!!.startConnection(object : BillingClientStateListener {
 
-                override fun onBillingSetupFinished(billingResult: BillingResult?) {
-                    if (billingResult?.responseCode == BillingClient.BillingResponseCode.OK)
+                override fun onBillingSetupFinished(billingResult: BillingResult) {
+                    if (billingResult.responseCode == BillingClient.BillingResponseCode.OK)
                         premium = checkPremium()
                     else
                         Toast.makeText(
@@ -78,7 +77,9 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
         if (billingClient == null)
             buildBilling()
         else
-            billingClient?.querySkuDetailsAsync(SkuDetailsParams.newBuilder().setSkusList(listOf(getString(R.string.soda))).setType(BillingClient.SkuType.INAPP).build()) { _, detailList ->
+            billingClient?.querySkuDetailsAsync(
+                SkuDetailsParams.newBuilder().setSkusList(listOf(getString(R.string.soda))).setType(BillingClient.SkuType.INAPP).build()
+            ) { _, detailList ->
                 if (detailList != null && detailList.isNotEmpty())
                     billingClient?.launchBillingFlow(this, BillingFlowParams.newBuilder().setSkuDetails(detailList[0]).build())
                 else
@@ -96,7 +97,7 @@ abstract class AbstractActivity : AppCompatActivity(), PurchasesUpdatedListener 
 
     private fun checkPremium(): Boolean {
         val purchaseResults: Purchase.PurchasesResult = billingClient?.queryPurchases(BillingClient.SkuType.INAPP) ?: return false
-        val purchases: List<Purchase> = purchaseResults.purchasesList
+        val purchases: List<Purchase> = purchaseResults.purchasesList ?: emptyList()
         return purchases.isNotEmpty()
     }
 }

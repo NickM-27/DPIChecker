@@ -2,7 +2,8 @@ package com.nick.mowen.dpichecker.binding
 
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 
@@ -100,13 +101,13 @@ object BindingAdapter {
         }
     }
 
-    private fun View.doOnApplyWindowInsets(block: (View, WindowInsets, InitialPadding, InitialMargin) -> Unit) {
+    private fun View.doOnApplyWindowInsets(block: (View, WindowInsetsCompat, InitialPadding, InitialMargin) -> Unit) {
         // Create a snapshot of the view's padding & margin states
         val initialPadding = recordInitialPaddingForView(this)
         val initialMargin = recordInitialMarginForView(this)
         // Set an actual OnApplyWindowInsetsListener which proxies to the given
         // lambda, also passing in the original padding & margin states
-        setOnApplyWindowInsetsListener { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
             block(v, insets, initialPadding, initialMargin)
             // Always return the insets, so that children can also use them
             insets
@@ -132,14 +133,14 @@ object BindingAdapter {
     private fun View.requestApplyInsetsWhenAttached() {
         if (isAttachedToWindow) {
             // We're already attached, just request as normal
-            requestApplyInsets()
+            ViewCompat.requestApplyInsets(this)
         } else {
             // We're not attached to the hierarchy, add a listener to
             // request when we are
             addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
                 override fun onViewAttachedToWindow(v: View) {
                     v.removeOnAttachStateChangeListener(this)
-                    v.requestApplyInsets()
+                    ViewCompat.requestApplyInsets(v)
                 }
 
                 override fun onViewDetachedFromWindow(v: View) = Unit
