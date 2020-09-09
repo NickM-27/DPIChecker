@@ -37,7 +37,7 @@ class SettingsActivity : AbstractActivity() {
     fun playStore(@Suppress("UNUSED_PARAMETER") view: View?) =
         startActivity(Intent(Intent.ACTION_VIEW).apply { data = "https://play.google.com/store/apps/dev?id=6410686151642848556&hl=en".toUri() })
 
-    fun rate(view: View?) = rateAppOnPlayStore(view!!.context)
+    fun rate(@Suppress("UNUSED_PARAMETER") view: View?) = rateAppOnPlayStore()
 
     fun share(@Suppress("UNUSED_PARAMETER") view: View?) {
         startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
@@ -69,13 +69,8 @@ class SettingsActivity : AbstractActivity() {
                 it.layoutManager = LinearLayoutManager(this)
                 it.isVerticalScrollBarEnabled = true
             })
-            .setPositiveButton(getString(R.string.action_rate_app)) { _, _ ->
-                try {
-                    startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=com.nick.mowen.albatross".toUri()))
-                } catch (e: ActivityNotFoundException) {
-                    startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.nick.mowen.albatross".toUri()))
-                }
-            }.show()
+            .setPositiveButton(getString(R.string.action_rate_app)) { _, _ -> rateAppOnPlayStore() }
+            .show()
     }
 
     private fun getLicenses() {
@@ -87,13 +82,8 @@ class SettingsActivity : AbstractActivity() {
                 it.layoutManager = LinearLayoutManager(this)
                 it.isVerticalScrollBarEnabled = true
             })
-            .setPositiveButton("RATE IN PLAY STORE") { _, _ ->
-                try {
-                    startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=com.nick.mowen.albatross".toUri()))
-                } catch (e: ActivityNotFoundException) {
-                    startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.nick.mowen.albatross".toUri()))
-                }
-            }.show()
+            .setPositiveButton("RATE IN PLAY STORE") { _, _ -> rateAppOnPlayStore() }
+            .show()
     }
 
     fun supportDev(@Suppress("UNUSED_PARAMETER") view: View) = buyPremium()
@@ -121,7 +111,7 @@ class SettingsActivity : AbstractActivity() {
             val titles = context.resources.getStringArray(titleRes)
             val texts = context.resources.getStringArray(textRes)
 
-            for (i in 0 until titles.size)
+            for (i in titles.indices)
                 list.add(Information(titles[i], texts[i]))
 
             submitList(list.reversed())
@@ -155,10 +145,10 @@ class SettingsActivity : AbstractActivity() {
             putExtra(Intent.EXTRA_TEXT, "I just wanted to tell you...")
         })
 
-        fun rateAppOnPlayStore(context: Context) = try {
-            context.startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=com.nick.mowen.dpichecker".toUri()))
+        private fun Context.rateAppOnPlayStore() = try {
+            startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=com.nick.mowen.dpichecker".toUri()))
         } catch (e: ActivityNotFoundException) {
-            context.startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.nick.mowen.dpichecker".toUri()))
+            startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.nick.mowen.dpichecker".toUri()))
         }
     }
 }

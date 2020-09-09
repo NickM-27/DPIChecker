@@ -10,10 +10,10 @@
 
         <ImageView
             android:id="@+id/ratio"
-            android:contentDescription="@string/content_description"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="28dp"
+            android:contentDescription="@string/content_description"
             android:src="@drawable/ic_aspect_ratio_themed"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -58,14 +58,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
                 android:text="@string/checkdpi"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
+                app:elevation="8dp"
                 app:layout_anchor="@+id/fab"
                 app:layout_anchorGravity="center" />
 
@@ -73,6 +73,7 @@
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description"
                 android:onClick="checkDPI"
                 app:fabSize="normal"
                 app:layout_anchor="@+id/toolbar" />
